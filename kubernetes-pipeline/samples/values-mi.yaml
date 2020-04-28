@@ -27,7 +27,7 @@ registry:
   # Add each repositories that would be used in the deployment
   repositories:
     &reg_repos
-    - <REGISTRY_USERNAME>/wso2ei-integrator
+    - <REGISTRY_USERNAME>/petstore
 
 # Values to configure Spinnaker
 spinnaker:
@@ -41,20 +41,20 @@ spinnaker:
         *reg_repos
 
 applications:
-  - name: wso2ei
+  - name: wso2mi
     email: <EMAIL>
     testScript:
       path: tests
       command: test.sh
     chart:
       customChart: false
-      name: ei-pattern-1
-      version: 6.5.0-3
-      repo: 'https://github.com/wso2-incubator/cicd-sample-chart-ei'
+      name: micro-integrator
+      version: 1.2.0-1
+      repo: 'https://github.com/wso2-incubator/cicd-sample-chart-mi'
     images:
       - organization: *reg_username
-        repository: wso2ei-integrator
-        deployment: wso2ei
+        repository: wso2mi
+        deployment: wso2microIntegrator
         customImage:
-          baseImage: 'wso2/wso2ei-integrator:6.5.0'
-          dockerfileGitRepo: 'https://github.com/wso2-incubator/cicd-sample-docker-ei'
+          baseImage: 'wso2/wso2mi:1.2.0'
+          dockerfileGitRepo: 'https://github.com/wso2-incubator/cicd-sample-docker-mi'
